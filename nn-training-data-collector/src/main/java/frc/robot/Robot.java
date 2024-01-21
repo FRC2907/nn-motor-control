@@ -5,6 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Subsystem;
+import frc.robot.subsystems.TankDrivetrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -13,15 +16,20 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * project.
  */
 public class Robot extends TimedRobot {
-  /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
-   */
+
+  Subsystem[] subsystems = {
+    TankDrivetrain.getInstance()
+    , Arm.getInstance()
+  };
+
   @Override
   public void robotInit() {}
 
   @Override
-  public void robotPeriodic() {}
+  public void robotPeriodic() {
+    for (Subsystem s : subsystems)
+      s.getTrainingData();
+  }
 
   @Override
   public void autonomousInit() {}
