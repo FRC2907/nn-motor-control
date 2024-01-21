@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package frc.robot.nn.proto;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+option java_package = "frc.robot.nn.proto";
+option java_outer_classname = "NNTrainingData";
+
+message MotorState {
+    string id = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    double position = 3;
+    double velocity = 4;
+    double acceleration = 5;
+    double jerk = 6;
+}
+
+message MotorInput {
+    double voltage = 1;
+}
+
+message MotorTimeStep {
+    google.protobuf.Duration duration = 1;
+    MotorState before = 2;
+    MotorInput input = 3;
+    MotorState after = 4;
+}
+
+message TrainingDataTimeStep {
+    repeated MotorTimeStep motor_readings = 2;
+}

@@ -1,11 +1,18 @@
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2024.1.1"
+    id "com.google.protobuf" version "0.9.4"
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
 }
 
 def ROBOT_MAIN_CLASS = "frc.robot.Main"
@@ -69,6 +76,8 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation 'com.google.protobuf:protobuf-java:3.0.0'
 }
 
 test {
