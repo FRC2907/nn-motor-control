@@ -20,7 +20,6 @@ public class MotorMonitor {
         this.last_reading_time = ObjectConvenience.getTimestamp();
         // NOTE this will probably generate bad data at the start of a session; fix in post
         this.last_state = MotorState.newBuilder()
-            .setId(this.id)
             .setTimestamp(this.last_reading_time)
             .setPosition(0)
             .setVelocity(0)
@@ -43,7 +42,6 @@ public class MotorMonitor {
 
         MotorInput latestInput = MotorInput.newBuilder().setVoltage(this.u.getAsDouble()).build();
         MotorState newState = MotorState.newBuilder()
-            .setId(this.id)
             .setTimestamp(now)
             .setPosition(position)
             .setVelocity(velocity)
@@ -51,6 +49,7 @@ public class MotorMonitor {
             .setJerk(jerk)
             .build();
         MotorTimeStep newReading = MotorTimeStep.newBuilder()
+            .setId(this.id)
             .setDuration(dur)
             .setBefore(last_state)
             .setInput(latestInput)

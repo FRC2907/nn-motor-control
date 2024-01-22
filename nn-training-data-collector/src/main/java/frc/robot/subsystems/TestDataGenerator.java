@@ -1,20 +1,24 @@
 package frc.robot.subsystems;
 
 import frc.robot.nn.TrainingDataProto.TrainingDataTimeStep;
+import frc.robot.nn.TrainingDataProto.TrainingDataTimeStep.Builder;
 
 public class TestDataGenerator implements Subsystem {
 
-    private MotorMonitor mon;
+    private MotorMonitor[] mon;
 
-    public TestDataGenerator(String id) {
-        this.mon = new MotorMonitor(id, Math::random, Math::random);
+    public TestDataGenerator(String ...ids) {
+        this.mon = new MotorMonitor[ids.length];
+        for (int i = 0; i < ids.length; i++)
+            this.mon[i] = new MotorMonitor(ids[i], Math::random, Math::random);
     }
 
     @Override
     public TrainingDataTimeStep getTrainingData() {
-        return TrainingDataTimeStep.newBuilder()
-            .addMotorReadings(mon.takeReading())
-            .build();
+        Builder out = TrainingDataTimeStep.newBuilder();
+        for (MotorMonitor m : mon)
+            out.addMotorReadings(m.takeReading());
+        return out.build();
     }
     
 }

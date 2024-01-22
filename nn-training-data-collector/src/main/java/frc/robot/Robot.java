@@ -23,7 +23,8 @@ public class Robot extends TimedRobot {
   private Subsystem[] subsystems = {
     //TankDrivetrain.getInstance()
     //, Arm.getInstance()
-    new TestDataGenerator("testy_mctestface")
+    new TestDataGenerator("testy_mctestface", "your_mom")
+    , new TestDataGenerator("third_thing_here")
   };
   private TrainingDataCollection data_for_export;
 
