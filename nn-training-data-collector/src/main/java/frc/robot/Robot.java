@@ -5,9 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import frc.robot.subsystems.Arm;
+import frc.robot.nn.TrainingDataCollection;
+import frc.robot.nn.TrainingDataServer;
 import frc.robot.subsystems.Subsystem;
-import frc.robot.subsystems.TankDrivetrain;
+//import frc.robot.subsystems.Arm;
+//import frc.robot.subsystems.TankDrivetrain;
+import frc.robot.subsystems.TestDataGenerator;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,18 +20,23 @@ import frc.robot.subsystems.TankDrivetrain;
  */
 public class Robot extends TimedRobot {
 
-  Subsystem[] subsystems = {
-    TankDrivetrain.getInstance()
-    , Arm.getInstance()
+  private Subsystem[] subsystems = {
+    //TankDrivetrain.getInstance()
+    //, Arm.getInstance()
+    new TestDataGenerator("testy_mctestface")
   };
+  private TrainingDataCollection data_for_export;
 
   @Override
-  public void robotInit() {}
+  public void robotInit() {
+    this.data_for_export = new TrainingDataCollection();
+    new TrainingDataServer(5800, this.data_for_export).start();
+  }
 
   @Override
   public void robotPeriodic() {
     for (Subsystem s : subsystems)
-      s.getTrainingData();
+    this.data_for_export.add(s.getTrainingData());
   }
 
   @Override

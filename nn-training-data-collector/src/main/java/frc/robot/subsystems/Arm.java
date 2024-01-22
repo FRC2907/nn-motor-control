@@ -3,8 +3,8 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import frc.robot.nn.proto.NNTrainingData.TrainingDataTimeStep;
-import frc.robot.nn.proto.NNTrainingData.TrainingDataTimeStep.Builder;
+import frc.robot.nn.TrainingDataProto.TrainingDataTimeStep;
+import frc.robot.nn.TrainingDataProto.TrainingDataTimeStep.Builder;
 
 public class Arm  implements Subsystem {
     private Arm(CANSparkMax ...mcs) {

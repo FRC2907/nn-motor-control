@@ -1,12 +1,13 @@
 syntax = "proto3";
 
-package frc.robot.nn.proto;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
-option java_package = "frc.robot.nn.proto";
-option java_outer_classname = "NNTrainingData";
+option java_package = "frc.robot.nn";
+option java_outer_classname = "TrainingDataProto";
+
+package training_data;
 
 message MotorState {
     string id = 1;
@@ -31,3 +32,9 @@ message MotorTimeStep {
 message TrainingDataTimeStep {
     repeated MotorTimeStep motor_readings = 2;
 }
+
+service TrainingData {
+    rpc GetTrainingData(TrainingDataRequest) returns (stream TrainingDataTimeStep) {}
+}
+
+message TrainingDataRequest {}

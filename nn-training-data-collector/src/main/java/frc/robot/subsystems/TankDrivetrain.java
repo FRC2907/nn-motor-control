@@ -4,7 +4,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.nn.proto.NNTrainingData.TrainingDataTimeStep;
+import frc.robot.nn.TrainingDataProto.TrainingDataTimeStep;
 import frc.robot.util.ObjectConvenience;
 
 public class TankDrivetrain extends DifferentialDrive implements Subsystem {
