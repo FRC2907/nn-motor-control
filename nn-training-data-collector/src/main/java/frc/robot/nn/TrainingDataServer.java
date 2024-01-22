@@ -19,10 +19,8 @@ public class TrainingDataServer {
 
         @Override
         public void getTrainingData(TrainingDataRequest unused, StreamObserver<TrainingDataTimeStep> responseObserver) {
-            data_source.removeIf((TrainingDataTimeStep reading) -> {
-                responseObserver.onNext(reading);
-                return true;
-            });
+            while (!data_source.isEmpty())
+                responseObserver.onNext(data_source.pop());
             responseObserver.onCompleted();
         }
     }
