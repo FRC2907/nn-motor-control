@@ -4,3 +4,9 @@ services:
     network_mode: host
     volumes:
       - /tmp:/tmp
+  tf_jupyter:
+    image: tensorflow/tensorflow:latest-jupyter
+    ports:
+      - 8888:8888
+    volumes:
+      - ./tf-jupyter:/tf/projects
