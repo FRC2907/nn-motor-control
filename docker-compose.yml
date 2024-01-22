@@ -1,0 +1,6 @@
+services:
+  nn_training_data_client:
+    image: nn-training-data-client
+    network_mode: host
+    volumes:
+      - /tmp:/tmp
